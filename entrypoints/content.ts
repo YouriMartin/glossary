@@ -6,17 +6,22 @@ interface Glossary {
 
 export default defineContentScript({
   matches: ["<all_urls>"],
-  cssInjectionMode: "manifest",
 
   async main(ctx) {
     const glossary: Glossary = glossaryFile;
+    const getModal: () => HTMLDivElement = () => {
+      return Object.assign(document.createElement("div"), {
+        style:
+          "position: absolute; background-color: white; padding: 1px 10px; border-radius: 10px; color: black",
+        className: "modal",
+      }) as HTMLDivElement;
+    };
 
     const ui = await createShadowRootUi(ctx, {
       name: "example-ui",
       position: "inline",
       onMount(container: HTMLElement) {
-        const modal = document.createElement("div");
-        modal.className = "modal";
+        const modal = getModal();
         modal.innerHTML = `
           <div class="modal-content">
             <p id="modal-text"></p>
@@ -33,13 +38,10 @@ export default defineContentScript({
           const selectedText = selection.toString().trim().toLowerCase();
 
           if (selectedText && glossary[selectedText] && modalText) {
-            modalText.textContent = `${selectedText} : ${glossary[selectedText]}`;
+            modalText.innerHTML = `<strong>${selectedText.toUpperCase()} :</strong> ${
+              glossary[selectedText]
+            }`;
             modal.style.display = "block";
-            modal.style.position = "absolute";
-            modal.style.backgroundColor = "white";
-            modal.style.padding = "1px 10px";
-            modal.style.borderRadius = "10px";
-            modal.style.color = "black";
             modal.style.top = `${
               selectionRect.top - selectionRect.height + window.scrollY
             }px`;
