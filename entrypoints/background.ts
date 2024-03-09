@@ -1,4 +1,1 @@
-export default defineBackground(() => {
-  console.log('Hello background!', );
-
-});
+export default defineBackground(() => {});
