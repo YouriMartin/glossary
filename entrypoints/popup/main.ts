@@ -8,7 +8,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
     <h1>Glossary Extension</h1>
     <div class="button-group">
     <a href="/popup-add-words.html" class="button">Add Words</a>
-    <a id="show-words" class="button">Show Words</a>
+    <a href="/popup-show-glossary.html" class="button">Show Words</a>
     </div>
     <a class="read-the-docs" href="https://github.com/YouriMartin/glossary">Github</a>
   </div>
