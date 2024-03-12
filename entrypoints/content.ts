@@ -1,8 +1,5 @@
 import glossaryFile from "@/public/glossary.json";
-
-interface Glossary {
-  [word: string]: string;
-}
+import Glossary from "./models/glossary";
 
 export default defineContentScript({
   matches: ["<all_urls>"],
