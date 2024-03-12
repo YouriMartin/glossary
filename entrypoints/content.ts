@@ -1,4 +1,4 @@
-import glossaryFile from "~/assets/glossary.json";
+import glossaryFile from "@/public/glossary.json";
 
 interface Glossary {
   [word: string]: string;
